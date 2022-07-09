@@ -1,5 +1,9 @@
 function App() {
-    return <div className="App">Start Init</div>;
+    return (
+        <div className="App">
+            Start Init <i class="bi bi-trash"></i>
+        </div>
+    )
 }
 
-export default App;
+export default App
