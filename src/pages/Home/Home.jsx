@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import './style.scss'
-import Auth from '../../components/Auth'
+import classes from './Home.module.scss'
+import Auth from '../../components/Auth/Auth'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
@@ -24,12 +24,12 @@ const Home = () => {
     }, [auth, navigate])
 
     return (
-        <div className="home-page">
-            <div className="home-page__start-screen">
+        <div className={classes.Home}>
+            <div className={classes.StartScreen}>
                 {!auth ? (
                     <Auth toggleAuth={toggleAuth} />
                 ) : (
-                    <h4 className="home-page__greetings">
+                    <h4 className={classes.Greetings}>
                         Артем Евгеньевич, <br />
                         добро пожаловать
                         <br />в Premium Auto

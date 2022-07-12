@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './style.scss'
+import classes from './Input.module.scss'
 
 const Input = ({ placeholder, type, required, onChange }) => {
     const [showPassword, setShowPassword] = useState(false)
@@ -9,11 +9,10 @@ const Input = ({ placeholder, type, required, onChange }) => {
     }
 
     return (
-        <div className="input">
+        <div className={classes.Input}>
             {type === 'password' ? (
                 <>
                     <input
-                        className="input__password"
                         placeholder={placeholder}
                         type={showPassword ? 'text' : 'password'}
                         required={required ? true : false}
@@ -21,12 +20,12 @@ const Input = ({ placeholder, type, required, onChange }) => {
                     />
 
                     <i
-                        className={showPassword ? 'bi bi-eye input__icon' : 'bi bi-eye-slash input__icon'}
+                        className={showPassword ? 'bi bi-eye ' + classes.Icon : 'bi bi-eye-slash ' + classes.Icon}
                         onClick={() => setShowPassword(!showPassword)}
                     ></i>
                 </>
             ) : (
-                <input className="input__text" placeholder={placeholder} type={type} required={required ? true : false} onChange={valueInput} />
+                <input placeholder={placeholder} type={type} required={required ? true : false} onChange={valueInput} />
             )}
         </div>
     )

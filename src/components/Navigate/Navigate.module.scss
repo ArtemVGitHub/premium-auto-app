@@ -1,0 +1,32 @@
+.Navbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -1px 6px rgba(#000, 0.2);
+}
+.Navbar__List {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 0;
+    padding: 8px;
+}
+
+.Navbar__Link {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    & i {
+        font-size: 20px;
+    }
+    & span {
+        font-size: 12px;
+    }
+}
