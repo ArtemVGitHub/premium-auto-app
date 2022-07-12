@@ -1,0 +1,17 @@
+.Input {
+    position: relative;
+    & input {
+        display: block;
+        width: 100%;
+    }
+}
+.Icon {
+    position: absolute;
+    line-height: 1;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Input + .Input {
+    margin-top: 8px;
+}
