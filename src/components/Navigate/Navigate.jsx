@@ -8,19 +8,19 @@ const Navigate = () => {
             <ul className={classes.Navbar__List}>
                 <li className={classes.Navbar__Item}>
                     <NavLink className={classes.Navbar__Link} to="/blanks">
-                        <i class="bi bi-files"></i>
+                        <i className="bi bi-files"></i>
                         <span>Договора</span>
                     </NavLink>
                 </li>
                 <li className={classes.Navbar__Item}>
                     <NavLink className={classes.Navbar__Link} to="/new">
-                        <i class="bi bi-file-earmark-plus"></i>
+                        <i className="bi bi-file-earmark-plus"></i>
                         <span>Новый</span>
                     </NavLink>
                 </li>
                 <li className={classes.Navbar__Item}>
                     <NavLink className={classes.Navbar__Link} to="/account">
-                        <i class="bi bi-file-person"></i>
+                        <i className="bi bi-file-person"></i>
                         <span>Аккаунт</span>
                     </NavLink>
                 </li>
