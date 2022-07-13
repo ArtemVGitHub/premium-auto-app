@@ -1,0 +1,9 @@
+.Button {
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    & i {
+        pointer-events: none;
+    }
+}

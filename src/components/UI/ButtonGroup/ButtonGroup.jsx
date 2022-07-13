@@ -1,8 +1,8 @@
 import React from 'react'
 import classes from './ButtonGroup.module.scss'
 
-const ButtonGroup = ({ children }) => {
-    return <div className={classes.ButtonGroup}>{children}</div>
+const ButtonGroup = ({ children, className }) => {
+    return <div className={className ? `${classes.ButtonGroup} ${className}` : classes.ButtonGroup}>{children}</div>
 }
 
 export default ButtonGroup
