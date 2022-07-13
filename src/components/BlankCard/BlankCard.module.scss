@@ -6,3 +6,15 @@
     box-shadow: 2px 2px 2px rgba(#000, 0.1);
     cursor: pointer;
 }
+.ButtonGroup {
+    justify-content: end;
+}
+
+.ButtonMore {
+    background-color: orange;
+    color: #fff;
+}
+.ButtonRemove {
+    background-color: tomato;
+    color: #fff;
+}

@@ -1,22 +1,15 @@
 import React, { useState } from 'react'
 import classes from './Blanks.module.scss'
 import BlankCard from '../../components/BlankCard/BlankCard'
-import { useNavigate } from 'react-router-dom'
 
 import { tempData } from '../../tempData'
 
 const Blanks = () => {
     const [blankList, setBalnkList] = useState(tempData)
 
-    const navigate = useNavigate()
-
-    function goToBlankPage(evt, id) {
-        if (evt.target.tagName !== 'BUTTON') {
-            navigate(`/blanks/${id}`)
-        } else {
-            const newBlankList = blankList.filter(blank => blank.id !== id)
-            setBalnkList(newBlankList)
-        }
+    function removeBlankFromList(id) {
+        const newBlankList = blankList.filter(blank => blank.id !== id)
+        setBalnkList(newBlankList)
     }
 
     return (
@@ -33,7 +26,8 @@ const Blanks = () => {
                                     model={blank.model}
                                     color={blank.color}
                                     number={blank.number}
-                                    onClick={evt => goToBlankPage(evt, blank.id)}
+                                    blankId={blank.id}
+                                    removeBlank={id => removeBlankFromList(id)}
                                 />
                             </div>
                         )
