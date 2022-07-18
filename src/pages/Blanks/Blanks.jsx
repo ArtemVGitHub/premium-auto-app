@@ -22,13 +22,7 @@ const Blanks = () => {
                     {blankList.map(blank => {
                         return (
                             <div className="col-12 col-md-4 col-lg-3" key={blank.id}>
-                                <BlankCard
-                                    model={blank.model}
-                                    color={blank.color}
-                                    number={blank.number}
-                                    blankId={blank.id}
-                                    removeBlank={id => removeBlankFromList(id)}
-                                />
+                                <BlankCard blank={blank} removeBlank={id => removeBlankFromList(id)} />
                             </div>
                         )
                     })}
