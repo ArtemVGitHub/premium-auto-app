@@ -4,7 +4,7 @@ import Navigate from '../../components/Navigate/Navigate'
 
 const Layout = () => {
     return (
-        <main>
+        <main style={{ paddingBottom: '74px' }}>
             <Navigate />
             <Outlet />
         </main>
