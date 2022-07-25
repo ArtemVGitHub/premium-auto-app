@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import classes from './Blanks.module.scss'
 import BlankCard from '../../components/BlankCard/BlankCard'
-
-import { tempData } from '../../tempData'
+import { BlankListConetxt } from '../../context'
 
 const Blanks = () => {
-    const [blankList, setBalnkList] = useState(tempData)
+    const { blankList, setBlankList } = useContext(BlankListConetxt)
 
     function removeBlankFromList(id) {
         const newBlankList = blankList.filter(blank => blank.id !== id)
-        setBalnkList(newBlankList)
+        setBlankList(newBlankList)
     }
 
     return (
