@@ -5,19 +5,33 @@ import Blanks from './pages/Blanks/Blanks'
 import Blank from './pages/Blank/Blank'
 import NewBlank from './pages/NewBlank/NewBlank'
 import Account from './pages/Account/Account'
+import { BrowserRouter } from 'react-router-dom'
+import { BlankListConetxt } from './context'
+import { tempData } from './tempData'
+import React, { useState } from 'react'
 
 function App() {
+    const [blankList, setBlankList] = useState(tempData)
     return (
         <div className="App">
-            <Routes>
-                <Route index element={<Home />} />
-                <Route path="/" element={<Layout />}>
-                    <Route path="blanks" element={<Blanks />} />
-                    <Route path="new" element={<NewBlank />} />
-                    <Route path="account" element={<Account />} />
-                    <Route path="blanks/:id" element={<Blank />} />
-                </Route>
-            </Routes>
+            <BlankListConetxt.Provider
+                value={{
+                    blankList,
+                    setBlankList,
+                }}
+            >
+                <BrowserRouter>
+                    <Routes>
+                        <Route index element={<Home />} />
+                        <Route path="/" element={<Layout />}>
+                            <Route path="blanks" element={<Blanks />} />
+                            <Route path="new" element={<NewBlank />} />
+                            <Route path="account" element={<Account />} />
+                            <Route path="blanks/:id" element={<Blank />} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </BlankListConetxt.Provider>
         </div>
     )
 }
