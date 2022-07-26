@@ -11,8 +11,17 @@
 }
 
 .ButtonMore {
+    display: block;
     background-color: orange;
     color: #fff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    & i {
+        pointer-events: none;
+    }
+    &:hover {
+        color: #fff;
+    }
 }
 .ButtonRemove {
     background-color: tomato;

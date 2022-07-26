@@ -2,19 +2,16 @@ import React, { useState } from 'react'
 import Input from '../../components/UI/Input/Input'
 import CheckInput from '../UI/CheckInput/CheckInput'
 import TextArea from '../UI/TextArea/TextArea'
-import { useNavigate } from 'react-router-dom'
 
-const BlankForm = ({ blank, children, getFormData }) => {
+const BlankForm = ({ blank, children, onSubmit }) => {
     const blankData = blank
         ? blank
         : {
-              blankInfo: {
-                  place: '',
-                  date: '',
-                  price: '',
-                  priceString: '',
-              },
-              vendorData: {
+              place: '',
+              date: '',
+              price: '',
+              priceString: '',
+              vendor: {
                   name: '',
                   birth: '',
                   address: '',
@@ -25,7 +22,7 @@ const BlankForm = ({ blank, children, getFormData }) => {
                       date: '',
                   },
               },
-              customerData: {
+              customer: {
                   name: '',
                   birth: '',
                   address: '',
@@ -36,7 +33,7 @@ const BlankForm = ({ blank, children, getFormData }) => {
                       date: '',
                   },
               },
-              carData: {
+              car: {
                   model: '',
                   category: '',
                   type: '',
@@ -48,38 +45,35 @@ const BlankForm = ({ blank, children, getFormData }) => {
                   body: '',
                   color: '',
               },
-              ptsData: {
+              pts: {
                   isElectron: false,
                   series: '',
                   number: '',
                   source: '',
                   date: '',
               },
-              stsData: {
+              sts: {
                   series: '',
                   number: '',
                   source: '',
                   date: '',
               },
           }
+    const [blankInfo, setBlankInfo] = useState({
+        place: blankData.place,
+        date: blankData.date,
+        price: blankData.price,
+        priceString: blankData.priceString,
+    })
+    const [vendorData, setVendorData] = useState({ ...blankData.vendor, pasport: { ...blankData.vendor.pasport } })
+    const [customerData, setCustomerData] = useState({ ...blankData.customer, pasport: { ...blankData.customer.pasport } })
+    const [carData, setCarData] = useState(blankData.car)
+    const [ptsData, setPtsData] = useState(blankData.pts)
+    const [stsData, setStsData] = useState(blankData.sts)
 
-    const [blankInfo, setBlankInfo] = useState(blankData.blankInfo)
-    const [vendorData, setVendorData] = useState(blankData.vendorData)
-    const [customerData, setCustomerData] = useState(blankData.customerData)
-    const [carData, setCarData] = useState(blankData.carData)
-    const [ptsData, setPtsData] = useState(blankData.ptsData)
-    const [stsData, setStsData] = useState(blankData.stsData)
-
-    const navigate = useNavigate()
-    function successSubmit() {
-        alert('Договор успешно добавлен')
-        setTimeout(() => {
-            navigate('/blanks')
-        }, 1000)
-    }
-    function submitHandler(evt) {
+    function submitForm(evt) {
         evt.preventDefault()
-        const newBlank = {
+        const blank = {
             ...blankInfo,
             vendor: { ...vendorData },
             customer: { ...customerData },
@@ -87,12 +81,11 @@ const BlankForm = ({ blank, children, getFormData }) => {
             pts: { ...ptsData },
             sts: { ...stsData },
         }
-        getFormData(newBlank)
-        successSubmit()
+        onSubmit(blank)
     }
 
     return (
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitForm}>
             <div className="row">
                 <div className="col-6 col-sm-2">
                     <Input

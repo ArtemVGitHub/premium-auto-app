@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import BlankArea from '../../components/BlankArea/BlankArea'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Button from '../../components/UI/Button/Button'
 import { BlankListConetxt } from '../../context'
 
 const Blank = () => {
     const { blankList } = useContext(BlankListConetxt)
-    const { id: blankId } = useParams()
+    const { id } = useParams()
     const [blankDate, setBlankDate] = useState('')
     const [blank, setCurrentBlank] = useState({
         id: '',
@@ -42,8 +42,8 @@ const Blank = () => {
         setCurrentBlank(curBlank)
     }
     useEffect(() => {
-        getCurrentBlank(blankList, blankId)
-    }, [blankId, blankList])
+        getCurrentBlank(blankList, id)
+    }, [id, blankList])
     return (
         <div className="container">
             <h3>Договор</h3>
@@ -96,7 +96,7 @@ const Blank = () => {
             </div>
             <div className="row">
                 <div className="col-auto">
-                    <Button onClick={() => console.log('Редактировать')}>Редактировать</Button>
+                    <Link to={`/blanks/${id}/edit`}>Редактировать</Link>
                 </div>
                 <div className="col-auto">
                     <Button onClick={() => console.log('Печать')}>Открыть</Button>
