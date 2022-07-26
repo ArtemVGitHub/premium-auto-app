@@ -4,6 +4,7 @@ import Layout from './hoc/Layout/Layout'
 import Blanks from './pages/Blanks/Blanks'
 import Blank from './pages/Blank/Blank'
 import NewBlank from './pages/NewBlank/NewBlank'
+import EditBlank from './pages/EditBlank/EditBlank'
 import Account from './pages/Account/Account'
 import { BrowserRouter } from 'react-router-dom'
 import { BlankListConetxt } from './context'
@@ -28,6 +29,7 @@ function App() {
                             <Route path="new" element={<NewBlank />} />
                             <Route path="account" element={<Account />} />
                             <Route path="blanks/:id" element={<Blank />} />
+                            <Route path="blanks/:id/edit" element={<EditBlank />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
