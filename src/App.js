@@ -1,3 +1,4 @@
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Layout from './hoc/Layout/Layout'
@@ -7,20 +8,13 @@ import NewBlank from './pages/NewBlank/NewBlank'
 import EditBlank from './pages/EditBlank/EditBlank'
 import Account from './pages/Account/Account'
 import { BrowserRouter } from 'react-router-dom'
-import { BlankListConetxt } from './context'
-import { tempData } from './tempData'
-import React, { useState } from 'react'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 function App() {
-    const [blankList, setBlankList] = useState(tempData)
     return (
         <div className="App">
-            <BlankListConetxt.Provider
-                value={{
-                    blankList,
-                    setBlankList,
-                }}
-            >
+            <Provider store={store}>
                 <BrowserRouter>
                     <Routes>
                         <Route index element={<Home />} />
@@ -33,7 +27,7 @@ function App() {
                         </Route>
                     </Routes>
                 </BrowserRouter>
-            </BlankListConetxt.Provider>
+            </Provider>
         </div>
     )
 }

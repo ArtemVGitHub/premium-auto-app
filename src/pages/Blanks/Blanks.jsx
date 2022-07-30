@@ -1,15 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useEffect } from 'react'
 import classes from './Blanks.module.scss'
 import BlankCard from '../../components/BlankCard/BlankCard'
-import { BlankListConetxt } from '../../context'
+import Loader from '../../components/Loader/Loader'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchBlanksFromDb } from '../../store/slices/blankSlice'
 
 const Blanks = () => {
-    const { blankList, setBlankList } = useContext(BlankListConetxt)
+    const blankList = useSelector(state => state.blanks.blanks)
+    const status = useSelector(state => state.blanks.status)
+    const dispatch = useDispatch()
 
-    function removeBlankFromList(id) {
-        const newBlankList = blankList.filter(blank => blank.id !== id)
-        setBlankList(newBlankList)
-    }
+    useEffect(() => {
+        dispatch(fetchBlanksFromDb())
+    }, [dispatch])
 
     return (
         <div className={classes.Blanks}>
@@ -18,13 +21,19 @@ const Blanks = () => {
                     <div className="col-12">
                         <h2 className={classes.Title}>Все договора</h2>
                     </div>
-                    {blankList.map(blank => {
-                        return (
-                            <div className="col-12 col-md-4 col-lg-3" key={blank.id}>
-                                <BlankCard blank={blank} removeBlank={id => removeBlankFromList(id)} />
-                            </div>
-                        )
-                    })}
+                    {status === 'loading' ? (
+                        <Loader />
+                    ) : blankList.length > 0 ? (
+                        blankList.map(blank => {
+                            return (
+                                <div className="col-12 col-md-4 col-lg-3" key={blank.id}>
+                                    <BlankCard blank={blank} />
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <div>Догвора отсутствуют</div>
+                    )}
                 </div>
             </div>
         </div>

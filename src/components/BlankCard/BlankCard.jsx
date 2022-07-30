@@ -3,11 +3,11 @@ import classes from './BlankCard.module.scss'
 import Button from '../UI/Button/Button'
 import ButtonGroup from '../UI/ButtonGroup/ButtonGroup'
 import { Link } from 'react-router-dom'
+import { deleteBlankFromDb } from '../../store/slices/blankSlice'
+import { useDispatch } from 'react-redux'
 
-const BlankCard = ({ blank, removeBlank }) => {
-    function remove(id) {
-        removeBlank(id)
-    }
+const BlankCard = ({ blank }) => {
+    const dispatch = useDispatch()
     return (
         <div className={classes.BlankCard}>
             <h3>{blank.car.model}</h3>
@@ -17,7 +17,7 @@ const BlankCard = ({ blank, removeBlank }) => {
                 <Link className={classes.ButtonMore} to={`/blanks/${blank.id}`}>
                     <i className="bi bi-eye"></i>
                 </Link>
-                <Button className={classes.ButtonRemove} onClick={() => remove(blank.id)}>
+                <Button className={classes.ButtonRemove} onClick={() => dispatch(deleteBlankFromDb({ id: blank.id }))}>
                     <i className="bi bi-trash"></i>
                 </Button>
             </ButtonGroup>
