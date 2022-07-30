@@ -1,27 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Button from '../../components/UI/Button/Button'
 import BlankForm from '../../components/BlankForm/BlankForm'
-import { BlankListConetxt } from '../../context'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addBlankToDb } from '../../store/slices/blankSlice'
 
 const NewBlank = () => {
-    const { blankList, setBlankList } = useContext(BlankListConetxt)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    function generateBlankId(blanks) {
-        const idsArray = blanks.map(blank => blank.id)
-        return Math.max(...idsArray) + 1 + ''
-    }
-    function addNewBlank(blank) {
-        const id = generateBlankId(blankList)
-        setBlankList([...blankList, { id, ...blank }])
-    }
     function successSubmit() {
         alert('Договор успешно добавлен')
         navigate('/blanks')
     }
     function submitHandler(blank) {
-        addNewBlank(blank)
+        dispatch(addBlankToDb({ blank }))
         successSubmit()
     }
 
