@@ -57,7 +57,7 @@ const BlankForm = ({ blank, children, onSubmit }) => {
                   number: '',
                   source: '',
                   date: '',
-              },
+              }
           }
     const [blankInfo, setBlankInfo] = useState({
         place: blankData.place,
