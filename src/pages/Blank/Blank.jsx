@@ -3,6 +3,8 @@ import BlankArea from '../../components/BlankArea/BlankArea'
 import { Link, useParams } from 'react-router-dom'
 import Button from '../../components/UI/Button/Button'
 import { useSelector } from 'react-redux'
+import { collection, getDocs, doc, deleteDoc, addDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
 
 const Blank = () => {
     const { id } = useParams()
@@ -12,14 +14,28 @@ const Blank = () => {
     function dateFormating(date) {
         return new Date(date).toLocaleDateString()
     }
+
+    async function printBlank() {
+        const querySnapshot = await getDocs(collection(db, 'printedDoc'))
+        querySnapshot.forEach(blank => {
+            deleteDoc(doc(db, 'printedDoc', blank.id))
+        })
+        try {
+            await addDoc(collection(db, 'printedDoc'), currentBlank)
+            window.location.href = 'https://docs.google.com/document/d/1leSY1FMJm0NLmmIgUFiK-8zjrLgHAttkZGAeT87zX18/edit'
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <div className="container">
             <h3>Договор</h3>
             <div className="row justify-content-between">
-                <div className="col-auto col-md-1">
+                <div className="col-auto">
                     <BlankArea>{currentBlank.place}</BlankArea>
                 </div>
-                <div className="col-auto col-md-1">
+                <div className="col-auto">
                     <BlankArea>{dateFormating(currentBlank.date)}</BlankArea>
                 </div>
             </div>
@@ -67,7 +83,7 @@ const Blank = () => {
                     <Link to={`/blanks/${id}/edit`}>Редактировать</Link>
                 </div>
                 <div className="col-auto">
-                    <Button onClick={() => console.log('Печать')}>Открыть</Button>
+                    <Button onClick={() => printBlank()}>Печать</Button>
                 </div>
             </div>
         </div>

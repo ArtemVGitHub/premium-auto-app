@@ -55,7 +55,6 @@ const blankSlice = createSlice({
             state.status = 'resolved'
             state.blanks = action.payload
         },
-        [fetchBlanksFromDb.rejected]: (state, action) => {},
     },
 })
 export const { addBlank, removeBlank, editBlank } = blankSlice.actions
