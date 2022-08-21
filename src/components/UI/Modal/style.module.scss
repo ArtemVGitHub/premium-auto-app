@@ -1,0 +1,20 @@
+.Modal {
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background-color: rgba(#000, 0.9);
+}
+.ModalBody {
+    border-radius: 16px;
+    padding: 15px;
+    min-height: 400px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+}
