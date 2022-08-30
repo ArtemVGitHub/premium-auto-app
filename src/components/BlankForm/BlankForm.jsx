@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from '../../components/UI/Input/Input'
 import CheckInput from '../UI/CheckInput/CheckInput'
 import TextArea from '../UI/TextArea/TextArea'
+import ParticipantForm from './ParticipantForm/ParticipantForm'
 
 const BlankForm = ({ blank, children, onSubmit }) => {
     const blankData = blank
@@ -57,7 +58,7 @@ const BlankForm = ({ blank, children, onSubmit }) => {
                   number: '',
                   source: '',
                   date: '',
-              }
+              },
           }
     const [blankInfo, setBlankInfo] = useState({
         place: blankData.place,
@@ -108,142 +109,10 @@ const BlankForm = ({ blank, children, onSubmit }) => {
             </div>
             <div className="row">
                 <div className="col-12 col-sm-6">
-                    <div className="col-12 fs-4 mt-3 mb-2">Продавец</div>
-                    <div className="row g-2">
-                        <div className="col-12">
-                            <Input
-                                id="vendorName"
-                                placeholder="Ф.И.О."
-                                type="text"
-                                value={vendorData.name}
-                                onChange={value => setVendorData({ ...vendorData, name: value })}
-                            ></Input>
-                        </div>
-                        <div className="col-6">
-                            <Input
-                                id="vendorBirth"
-                                placeholder="Дата рождения"
-                                type="text"
-                                value={vendorData.birth}
-                                onChange={value => setVendorData({ ...vendorData, birth: value })}
-                            ></Input>
-                        </div>
-                        <div className="col-12">
-                            <TextArea
-                                className="form-control"
-                                id="vendorAddress"
-                                placeholder="Место регистрации"
-                                value={vendorData.address}
-                                onChange={value => setVendorData({ ...vendorData, address: value })}
-                            />
-                        </div>
-                        <div className="col-12">Паспорт</div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="vendorPasportSeries"
-                                placeholder="Серия"
-                                type="text"
-                                value={vendorData.pasport.series}
-                                onChange={value => setVendorData({ ...vendorData, pasport: { ...vendorData.pasport, series: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="vendorPasportNumber"
-                                placeholder="Номер"
-                                type="text"
-                                value={vendorData.pasport.number}
-                                onChange={value => setVendorData({ ...vendorData, pasport: { ...vendorData.pasport, number: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="vendorPasportDate"
-                                placeholder="Дата выдачи"
-                                type="text"
-                                value={vendorData.pasport.date}
-                                onChange={value => setVendorData({ ...vendorData, pasport: { ...vendorData.pasport, date: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12">
-                            <TextArea
-                                className="form-control"
-                                id="vendorPasportSource"
-                                placeholder="Кем выдан"
-                                value={vendorData.pasport.source}
-                                onChange={value => setVendorData({ ...vendorData, pasport: { ...vendorData.pasport, source: value } })}
-                            />
-                        </div>
-                    </div>
+                    <ParticipantForm partData={blankData.vendor} participantRole="vendor" getData={setVendorData} />
                 </div>
                 <div className="col-12 col-sm-6">
-                    <div className="col-12 fs-4 mt-3 mb-2">Покупатель</div>
-                    <div className="row g-2">
-                        <div className="col-12">
-                            <Input
-                                id="customerName"
-                                placeholder="Ф.И.О."
-                                type="text"
-                                value={customerData.name}
-                                onChange={value => setCustomerData({ ...customerData, name: value })}
-                            ></Input>
-                        </div>
-                        <div className="col-6">
-                            <Input
-                                id="customerBirth"
-                                placeholder="Дата рождения"
-                                type="text"
-                                value={customerData.birth}
-                                onChange={value => setCustomerData({ ...customerData, birth: value })}
-                            ></Input>
-                        </div>
-                        <div className="col-12">
-                            <TextArea
-                                className="form-control"
-                                id="customerAddress"
-                                placeholder="Место регистрации"
-                                value={customerData.address}
-                                onChange={value => setCustomerData({ ...customerData, address: value })}
-                            />
-                        </div>
-                        <div className="col-12">Паспорт</div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="customerPasportSeries"
-                                placeholder="Серия"
-                                type="text"
-                                value={customerData.pasport.series}
-                                onChange={value => setCustomerData({ ...customerData, pasport: { ...customerData.pasport, series: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="customerPasportNumber"
-                                placeholder="Номер"
-                                type="text"
-                                value={customerData.pasport.number}
-                                onChange={value => setCustomerData({ ...customerData, pasport: { ...customerData.pasport, number: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12 col-sm-4">
-                            <Input
-                                id="customerPasportDate"
-                                placeholder="Дата выдачи"
-                                type="text"
-                                value={customerData.pasport.date}
-                                onChange={value => setCustomerData({ ...customerData, pasport: { ...customerData.pasport, date: value } })}
-                            ></Input>
-                        </div>
-                        <div className="col-12">
-                            <TextArea
-                                className="form-control"
-                                id="customerPasportSource"
-                                placeholder="Кем выдан"
-                                value={customerData.pasport.source}
-                                onChange={value => setCustomerData({ ...customerData, pasport: { ...customerData.pasport, source: value } })}
-                            />
-                        </div>
-                    </div>
+                    <ParticipantForm partData={blankData.customer} participantRole="customer" getData={setCustomerData} />
                 </div>
             </div>
             <div className="row g-2">

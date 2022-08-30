@@ -4,6 +4,7 @@ import BlankCard from '../../components/BlankCard/BlankCard'
 import Loader from '../../components/Loader/Loader'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchBlanksFromDb } from '../../store/slices/blankSlice'
+import { fetchParticipantsFromDb } from '../../store/slices/participantsSlice'
 
 const Blanks = () => {
     const blankList = useSelector(state => state.blanks.blanks)
@@ -12,6 +13,10 @@ const Blanks = () => {
 
     useEffect(() => {
         dispatch(fetchBlanksFromDb())
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(fetchParticipantsFromDb())
     }, [dispatch])
 
     return (

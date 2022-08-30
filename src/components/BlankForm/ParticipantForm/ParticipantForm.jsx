@@ -1,47 +1,75 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Input from '../../UI/Input/Input'
 import TextArea from '../../UI/TextArea/TextArea'
 
-const ParticipantForm = ({ participantRole, getData }) => {
-    const [partData, setPartData] = useState({
-        name: '',
-        birth: '',
-        address: '',
+const ParticipantForm = ({ partData, participantRole, getData }) => {
+    const partList = useSelector(state => state.participants.participants)
+
+    const [partInfo, setPartInfo] = useState({
+        name: partData.name ? partData.name : '',
+        birth: partData.birth ? partData.birth : '',
+        address: partData.address ? partData.address : '',
     })
     const [pasportData, setPasportData] = useState({
-        series: '',
-        number: '',
-        source: '',
-        date: '',
+        series: partData.pasport.series ? partData.pasport.series : '',
+        number: partData.pasport?.number ? partData.pasport.number : '',
+        source: partData.pasport?.source ? partData.pasport.source : '',
+        date: partData.pasport?.date ? partData.pasport.date : '',
     })
-    useMemo(() => {
-        function updateParticipantInfo(partData, pasportData) {
-            const partFullData = {
-                ...partData,
-                [participantRole]: { ...pasportData },
-            }
-            getData(partFullData)
+    useEffect(() => {
+        const data = {
+            ...partInfo,
+            pasport: { ...pasportData },
         }
-        updateParticipantInfo(partData, pasportData)
-    }, [getData, partData, participantRole, pasportData])
+        getData(data)
+    }, [partInfo, pasportData])
+
+    function chooseParticipantFromDB(evt) {
+        const selectedParticipant = evt.target.value
+        const selectedParticipantData = partList.find(part => part.name === selectedParticipant)
+        setPartInfo({
+            ...partInfo,
+            name: selectedParticipantData.name,
+            birth: selectedParticipantData.birth,
+            address: selectedParticipantData.address,
+        })
+    }
+
     return (
         <>
             <div className="col-12 fs-4 mt-3 mb-2">{participantRole === 'vendor' ? 'Продавец' : 'Покупатель'}</div>
             <div className="row g-2">
-                <div className="col-12">
+                <div className="col-10">
                     <Input
                         id={`${participantRole}Name`}
                         placeholder="Ф.И.О."
                         type="text"
-                        onChange={value => setPartData({ ...partData, name: value })}
+                        value={partInfo.name}
+                        onChange={value => setPartInfo({ ...partInfo, name: value })}
                     ></Input>
+                </div>
+                <div className="col-2">
+                    <select defaultValue={'Выбрать'} id={`${participantRole}Select`} placeholder="Выбрать" onChange={chooseParticipantFromDB}>
+                        <option disabled value="Выбрать">
+                            Выбрать
+                        </option>
+                        {partList.map(part => {
+                            return (
+                                <option value={part.name} key={part.name}>
+                                    {part.name}
+                                </option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <div className="col-6">
                     <Input
                         id={`${participantRole}Birth`}
                         placeholder="Дата рождения"
                         type="text"
-                        onChange={value => setPartData({ ...partData, birth: value })}
+                        value={partInfo.birth}
+                        onChange={value => setPartInfo({ ...partInfo, birth: value })}
                     ></Input>
                 </div>
                 <div className="col-12">
@@ -49,7 +77,8 @@ const ParticipantForm = ({ participantRole, getData }) => {
                         className="form-control"
                         id={`${participantRole}Address`}
                         placeholder="Место регистрации"
-                        onChange={value => setPartData({ ...partData, address: value })}
+                        value={partInfo.address}
+                        onChange={value => setPartInfo({ ...partInfo, address: value })}
                     />
                 </div>
                 <div className="col-12">Паспорт</div>
